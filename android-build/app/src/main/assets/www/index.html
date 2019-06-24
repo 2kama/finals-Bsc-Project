@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/moment.js"></script>
+
+
+  </head>
+  <body>
+
+      <div class="geo">
+          <div class="marker">
+              <img src="img/marker.png" alt="">
+          </div>
+          <div class="markerText">Put on your location!</div>
+
+          <button class="locationSettings">Go to Settings</button>
+      </div>
+
+
+      <div class="auth">
+          <img src="img/logo.png" />
+         <input type="text" class="pin" placeholder="ID Pin" />
+         <button class="authUser">Authenticate</button>
+         
+      </div>
+
+
+      <div class="section">
+`           <i class="material-icons jump">notifications</i>
+
+
+            <div class="box">
+                <input type="text" class="Number" placeholder="Input Plate No / VIN"/>
+                <button class="plate" style="width: 90%;">CHECK</button>
+            </div>
+
+          
+      </div>
+
+      <div class="wrapper">
+
+      <div class="hind">
+         <h3 style="text-align: center;">Reports</h3>
+      </div>
+         
+
+
+         <button class="close" style="background: red;">close</button>
+      </div>
+
+
+    <div class="error"></div>
+    <div class="success"></div>
+    <div class="waiting"></div>
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/6.2.2/firebase-app.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/6.2.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.2/firebase-firestore.js"></script>
+  
+  <script>
+      const firebaseConfig = {
+          apiKey: "AIzaSyDbfGDVHLQhmwJlYVOvYdfZekA9kGWgrsU",
+          authDomain: "vtrsystem.firebaseapp.com",
+          databaseURL: "https://vtrsystem.firebaseio.com",
+          projectId: "vtrsystem",
+          storageBucket: "vtrsystem.appspot.com",
+          messagingSenderId: "833944980186",
+          appId: "1:833944980186:web:f7cdc1cbd247be7a"
+      };
+  
+    firebase.initializeApp(firebaseConfig);
+  </script>
+
+
+      <script type="text/javascript" src="js/activity.js"></script>
+
+
+
+
+
+  <script type="text/javascript">
+    
+
+      $(document).ready(function() {
+
+
+            const auth = firebase.auth();
+            const db = firebase.firestore();
+
+
+
+
+
+            db.collection("report").onSnapshot(snapshot => {
+              snapshot.docChanges().forEach(change => {
+
+                    if(change.type === "added") {
+
+                        $('.hind').append("<div class='some " + change.doc.id + "'><b>VIN</b><br>" + change.doc.data().carVin + "<br><br><b>Plate No</b><br>"+change.doc.data().carPlate+"<br><br><b>Model</b><br>" + change.doc.data().carBrand + " " + change.doc.data().carModel + "<br><br><b>Color</b><br>" + change.doc.data().newColor + "<br><br><b>Time</b><br>"+moment(change.doc.data().timestamp).format("MMM Do, YY")+"</div>");
+                        navigator.vibrate(3000)
+
+                    }
+
+                    if(change.type === "removed") {
+
+                        $(`.${change.doc.id}`).remove()
+
+                    }
+
+             })
+
+            })
+
+
+
+
+            //login query
+            $('.authUser').click(function() {
+                var pin = $('.pin').val();
+
+                if(pin == "") {
+
+                    $('.error').html("Cannot verify empty pin.").show();
+
+                    setTimeout(function() {
+                        $('.error').hide();
+                    }, 3000);
+                }
+                else {
+                    $('.error').hide();
+
+                    $('.authUser').hide();
+
+                    $('.waiting').html("Authenticating...").show();
+
+                    db.collection("users").where("userCode", "==", pin).get().then(querySnapShot => {
+                        if(querySnapShot.size == 1) {
+
+                             $('.auth').hide();
+                             $('.authUser').show();
+                             $('.success').html("Welcome").show();
+                             $('.waiting').hide();
+
+                             setTimeout(function() {
+
+                                $('.success').hide();
+
+                             }, 2000);
+
+                        }
+                        else {
+                            $('.error').html("Unknown Identifier.").show();
+                            $('.waiting').hide();
+                            $('.authUser').show();
+
+                            setTimeout(function() {
+                                $('.error').hide();
+                            }, 3000);
+                        }
+                    });
+
+                }
+
+            });
+
+
+
+
+            $('.close').click(function() {
+                $('.section').animate({"margin-left":"0%"}, 300, "linear");
+
+            });
+
+            $('.jump').click(function() {
+                $('.section').animate({"margin-left":"-100%"}, 300, "linear");
+            });
+
+            
+
+
+            //plate
+
+            $('.plate').click(function() {
+
+                 var plate = $('.Number').val();
+
+                 if(plate == "") {
+                     $('.error').html("Input a Plate Number").show();
+
+                    setTimeout(function() {
+                        $('.error').hide();
+                    }, 3000);
+                 }
+
+                 else {
+
+                    $('.plate, .vin').hide();
+                    $('.error, .success').hide();
+                    $('.waiting').html("Querying database...").show();
+
+                    db.collection('report').where("carPlate", "==", plate).where("report", "==", "missing").get().then(onSnapShot1 => {
+
+
+                        if(onSnapShot1.size >= 1) {
+
+                          $('.waiting').hide();
+                            
+                            $('.error').html("Vehicle reported missing.").show();
+                            navigator.vibrate(3000);
+
+
+                            setTimeout(function() {
+                                $('.error').hide();
+                            }, 3000);
+
+                            $('.plate, .vin').show();
+                            
+                        }
+
+                        else {
+
+
+                            db.collection('report').where("carVin", "==", plate).where("report", "==", "missing").get().then(onSnapShot2 => {
+
+                                if(onSnapShot2.size >= 1) {
+
+                                    $('.waiting').hide();
+                            
+                                    $('.error').html("Vehicle reported missing.").show();
+                                    navigator.vibrate(3000);
+
+
+                                    setTimeout(function() {
+                                        $('.error').hide();
+                                    }, 3000);
+
+                                    $('.plate, .vin').show();
+                                }
+
+                                else {
+
+
+
+                                    db.collection('car').where("CarPlate", "==", plate).get().then(onSnapShot3 => {
+
+                                        if(onSnapShot3.size >= 1) {
+
+                                            $('.waiting').hide();
+                                            $('.success').html("Vehicle Cleared.").show();
+                                            
+
+
+                                            setTimeout(function() {
+                                                $('.success').hide();
+                                            }, 3000);
+
+                                            $('.plate').show();
+
+
+                                        }
+
+                                        else {
+
+                                            db.collection('car').where("CarVin", "==", plate).get().then(onSnapShot4 => {
+
+                                                if(onSnapShot4.size >= 1) {
+
+                                                    $('.waiting').hide();
+                                                    $('.success').html("Vehicle Cleared.").show();
+                                                    
+
+
+                                                    setTimeout(function() {
+                                                        $('.success').hide();
+                                                    }, 3000);
+
+                                                    $('.plate').show();
+
+                                                }
+
+
+                                                else {
+
+                                                    $('.waiting').hide();
+                            
+                                                        $('.error').html("No Registration details found.").show();
+                                                        navigator.vibrate(3000);
+
+
+                                                        setTimeout(function() {
+                                                            $('.error').hide();
+                                                        }, 3000);
+
+                                                        $('.plate, .vin').show();
+
+                                                }
+
+                                            })
+
+                                        }
+
+                                    })
+
+
+
+                                    
+
+                                }
+
+                            })
+
+
+
+
+                            
+                        }
+
+
+                    });
+
+                 }
+            });
+
+
+
+
+
+
+
+
+
+      });
+
+
+  </script>
+
+  </body>
+</html>

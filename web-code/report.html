@@ -1,0 +1,353 @@
+
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]>			<html class="ie ie8"> <![endif]-->
+<!--[if IE 9]>			<html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
+	<head>
+		<meta charset="utf-8" />
+		<title>vtr</title>
+		<meta name="keywords" content="HTML5,CSS3,Template" />
+		<meta name="description" content="" />
+		<meta name="Author" content="Dorin Grigoras [www.stepofweb.com]" />
+
+		<!-- mobile settings -->
+		<meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
+		<!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+
+		<!-- WEB FONTS : use %7C instead of | (pipe) -->
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400%7CRaleway:300,400,500,600,700%7CLato:300,400,400italic,600,700" rel="stylesheet" type="text/css" />
+
+		<!-- CORE CSS -->
+		<link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+		<script type="text/javascript" src="assets/plugins/jquery/jquery-2.1.4.min.js"></script>
+
+		<!-- THEME CSS -->
+		<link href="assets/css/essentials.css" rel="stylesheet" type="text/css" />
+		<link href="assets/css/layout.css" rel="stylesheet" type="text/css" />
+
+		<!-- PAGE LEVEL SCRIPTS -->
+		<link href="assets/css/header-1.css" rel="stylesheet" type="text/css" />
+		<link href="assets/css/color_scheme/green.css" rel="stylesheet" type="text/css" id="color_scheme" />
+
+      <script type="text/javascript" src="js/w3.js"></script>
+	</head>
+
+
+	<body class="smoothscroll enable-animation">
+
+
+
+
+		<!-- wrapper -->
+		<div id="wrapper">
+
+
+			<div id="header" class="sticky clearfix header-sm">
+
+				<!-- TOP NAV -->
+				<header id="topNav">
+					<div class="container">
+
+						<!-- Mobile Menu Button -->
+						<button class="btn btn-mobile" data-toggle="collapse" data-target=".nav-main-collapse">
+							<i class="fa fa-bars"></i>
+						</button>
+
+
+						<!-- Logo -->
+						<a class="logo pull-left" href="index.html">
+							<img src="assets/images/.png" alt="" />
+						</a>
+
+
+						<div class="navbar-collapse pull-right nav-main-collapse collapse">
+							<nav class="nav-main">
+
+
+								<ul id="topMain" class="nav nav-pills nav-main">
+									<li>
+										<a  href="home.html">
+											HOME
+										</a>
+
+									</li>
+
+                  <li><a href="report.html">REPORTS</a></li>
+
+                  <li><a href="javascript:;" class="lo">LOGOUT</a></li>
+								</ul>
+
+							</nav>
+						</div>
+
+					</div>
+				</header>
+				<!-- /Top Nav -->
+
+			</div>
+
+
+			<!-- -->
+
+
+      <section>
+        <div class="container">
+
+          
+
+
+          <div class="col-md-12">
+
+            <form class="nomargin" method="post" action="#" autocomplete="off">
+              <div class="clearfix">
+
+                <!-- Email -->
+                <div class="form-group">
+                  <input type="text" name="text" class="form-control" placeholder="Search" oninput="w3.filterHTML('tbody', 'tr.to', this.value)">
+                </div>
+
+              </div>
+
+              <div class="row">
+
+
+
+              </div>
+
+            </form>
+
+          </div>
+
+
+     
+
+
+						  <div class="col-md-12">
+
+
+                <div class="table-responsive">
+                  <table class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th> Reporter </th>
+                    <th>Reporter Phone Number</th>
+                    <th> Plate No</th>
+                    <th> VI No</th>
+                    <th> Brand</th>
+                    <th>Model</th>
+                    <th> Report</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+
+                    
+
+
+                  </tbody>
+                  </table>
+                  </div>
+
+
+						  </div>
+
+				</div>
+
+			</section>
+			<!-- / -->
+
+      <section></section>
+
+
+
+
+			<!-- FOOTER -->
+			<footer id="footer">
+
+				<div class="copyright">
+					<div class="container">
+						<ul class="pull-right nomargin list-inline mobile-block">
+							<li><a href="#">Terms &amp; Conditions</a></li>
+							<li>&bull;</li>
+							<li><a href="#">Privacy</a></li>
+						</ul>
+						&copy; All Rights Reserved, Company LTD
+					</div>
+				</div>
+			</footer>
+			<!-- /FOOTER -->
+
+		</div>
+		<!-- /wrapper -->
+
+
+		<!-- SCROLL TO TOP -->
+		<a href="#" id="toTop"></a>
+
+
+
+
+		<!-- JAVASCRIPT FILES -->
+		<script type="text/javascript">var plugin_path = 'assets/plugins/';</script>
+
+		<script type="text/javascript" src="assets/js/scripts.js"></script>
+
+
+
+
+		<script src="https://www.gstatic.com/firebasejs/6.2.2/firebase-app.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/6.2.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.2.2/firebase-firestore.js"></script>
+
+<script>
+	const firebaseConfig = {
+		apiKey: "AIzaSyDbfGDVHLQhmwJlYVOvYdfZekA9kGWgrsU",
+		authDomain: "vtrsystem.firebaseapp.com",
+		databaseURL: "https://vtrsystem.firebaseio.com",
+		projectId: "vtrsystem",
+		storageBucket: "vtrsystem.appspot.com",
+		messagingSenderId: "833944980186",
+		appId: "1:833944980186:web:f7cdc1cbd247be7a"
+	};
+
+  firebase.initializeApp(firebaseConfig);
+</script>
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+
+        const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    auth.onAuthStateChanged(user => {
+      if (user) {
+
+
+
+            $('.lo').click(function() {
+                auth.signOut();
+
+            });
+
+
+
+            db.collection("report").onSnapshot(snapshot => {
+              snapshot.docChanges().forEach(change => {
+
+                    if(change.type === "added") {
+
+                        let report
+
+                        if(change.doc.data().report == "missing") {
+                          report = "<button type='button' class='btn btn-success btn-xs btn" + change.doc.data().carPlate + "'>Report Found</button>"
+                        }
+                        else if(change.doc.data().report == "found") {
+                               report = "<button type='button' class='btn btn-danger btn-xs sbtn" + change.doc.data().carPlate + "'>Close Case</button>";
+                            }
+                            else {
+                              report = "Closed Case";
+                            }
+
+
+
+
+                      $('tbody').append("<tr class='to tap" + change.doc.data().carPlate + "'><td>" + change.doc.data().complainer + "</td><td>" + change.doc.data().complainerNum + "</td><td>" + change.doc.data().carPlate + "</td><td>" + change.doc.data().carVin + "</td><td>" + change.doc.data().carBrand + "</td><td>" + change.doc.data().carModel + "</td><td>" + report + "</td></tr>");
+
+                         
+
+                      $('.btn' + change.doc.data().carPlate).click(() => {
+
+                            db.collection("report").doc(change.doc.id).update({
+                               report: "found"
+                            });
+
+                      }); 
+
+
+                      $('.sbtn' + change.doc.data().carPlate).click(() => {
+
+
+                            db.collection("report").doc(change.doc.id).update({
+                               report: "returned"
+                            });
+
+                            $('.sbtn' + plate).remove();
+
+                      }); 
+
+                    }
+
+
+                    if(change.type === "modified") {
+
+                      let report
+
+                      if(change.doc.data().report == "missing") {
+                        report = "<button type='button' class='btn btn-success btn-xs btn" + change.doc.data().CarPlate + "'>Report Found</button>"
+                      }
+                      else if(change.doc.data().report == "found") {
+                            report = "<button type='button' class='btn btn-danger btn-xs sbtn" + change.doc.data().CarPlate + "'>Close Case</button>";
+                          }
+                          else {
+                            report = "Closed Case";
+                          }
+
+
+
+
+                      $('tbody tr.tap' + change.doc.data().carPlate).html("<td>" + change.doc.data().complainer + "</td><td>" + change.doc.data().complainerNum + "</td><td>" + change.doc.data().carPlate + "</td><td>" + change.doc.data().carVin + "</td><td>" + change.doc.data().carBrand + "</td><td>" + change.doc.data().carModel + "</td><td>" + report + "</td>");
+
+                      
+
+                      $('.btn' + change.doc.data().carPlate).click(() => {
+
+                          db.collection("report").doc(change.doc.id).update({
+                            report: "found"
+                          });
+
+                      }); 
+
+
+                      $('.sbtn' + change.doc.data().carPlate).click(() => {
+
+
+                          db.collection("report").doc(change.doc.id).update({
+                            report: "returned"
+                          });
+
+                          $('.sbtn' + plate).remove();
+
+                      }); 
+
+
+
+                    }
+
+
+              })
+            })
+
+
+
+
+      } else {
+
+
+          setTimeout("location.href = 'index.html';",0000);
+          
+      }
+
+  });
+
+        });
+    </script>
+
+	</body>
+</html>

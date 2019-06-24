@@ -1,0 +1,4 @@
+#Mon Jun 24 13:39:10 EDT 2019
+base.0=C\:\\wamp64\\www\\cordovaApps\\vtr\\platforms\\vtr-android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\2
+path.0=classes.dex
+renamed.0=classes.dex
